@@ -4,10 +4,12 @@ import com.codingjx.blogservice.entity.Post;
 import com.codingjx.blogservice.payload.PostDto;
 import com.codingjx.blogservice.repository.PostRepository;
 import com.codingjx.blogservice.service.PostService;
+import com.codingjx.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,6 +32,14 @@ public class PostServiceImpl implements PostService {
     public List<PostDto> getAllPosts() {
         List<Post> posts = postRepository.findAll();
         return posts.stream().map(post -> mapToDto(post)).collect(Collectors.toList());
+    }
+
+    @Override
+    public PostDto getPostById(long id) {
+        Post post = postRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Post", "id", id));
+        return mapToDto(post);
     }
 
     private Post mapToEntity(PostDto postDto) {
