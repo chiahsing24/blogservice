@@ -1,6 +1,7 @@
 package com.codingjx.blogservice.controller;
 
 import com.codingjx.blogservice.payload.PostDto;
+import com.codingjx.blogservice.payload.PostResponse;
 import com.codingjx.blogservice.service.PostService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +24,10 @@ public class PostController {
     }
 
     @GetMapping
-    public List<PostDto> getAllPosts() {
-        return postService.getAllPosts();
+    public PostResponse getAllPosts(
+            @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+            @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize) {
+        return postService.getAllPosts(pageNo, pageSize);
     }
 
     @GetMapping("/{id}")
