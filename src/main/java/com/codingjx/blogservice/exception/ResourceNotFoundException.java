@@ -1,4 +1,4 @@
-package com.codingjx.exception;
+package com.codingjx.blogservice.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
