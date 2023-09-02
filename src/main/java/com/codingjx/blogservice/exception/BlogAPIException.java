@@ -3,6 +3,7 @@ package com.codingjx.blogservice.exception;
 import org.springframework.http.HttpStatus;
 
 public class BlogAPIException extends RuntimeException {
+
     private HttpStatus status;
     private String message;
 
@@ -21,7 +22,8 @@ public class BlogAPIException extends RuntimeException {
         return status;
     }
 
-    public void setStatus(HttpStatus status) {
-        this.status = status;
+    @Override
+    public String getMessage() {
+        return message;
     }
 }
